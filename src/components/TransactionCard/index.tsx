@@ -1,89 +1,72 @@
-
 import type { ReactNode } from "react";
 import { HiUpload } from "react-icons/hi";
-import { FaArrowRightLong } from "react-icons/fa6";
+import { NameAccountCard } from "./NameAccountCard";
 import { HiDownload } from "react-icons/hi";
-
-/*
-initial_balance
-sent
-received
-transfer
-*/
+import { colors } from "../../styles/colors";
+import { TitleCard } from "./TitleCard";
+import { DateAmountCard } from "./DateAmountCard";
 export interface ITransaction {
-    type: string,
-    amount: number, //valor transferido
+    type: string;
+    amount: number; // valor transferido
     sourceAccount?: {
-        name: string
-        balance: number
-    },
+        name: string;
+        balance: number;
+    };
     destinationAccount?: {
-        name: string
-        balance: number
-    }
-    date: string
+        name: string;
+        balance: number;
+    };
+    date: string;
 }
-
-
 
 export function TransactionsCard(transaction: ITransaction) {
     let title_card: string | null = null;
-    let icon: ReactNode | null = null
+    let bgColor: string = colors.bgDarkGray; // valor padrão
+    let icon: ReactNode | null = null;
+    const sizeIcon = 20;
+    //Dependendo de cada 
     switch (transaction.type) {
-        case 'initial_balance':
-            title_card = 'Saldo Inicial';
-
+        case "initial_balance":
+            title_card = "Saldo Inicial";
+            bgColor = colors.bgDarkGray;
             break;
-        case 'sent':
-            title_card = 'Enviado';
-            icon = <HiUpload />;
+        case "sent":
+            title_card = "Enviado";
+            bgColor = colors.bgRed;
+            icon = <HiUpload size={sizeIcon} />;
             break;
-        case 'received':
-            title_card = 'Recebido';
-            icon = <HiDownload />;
+        case "received":
+            title_card = "Recebido";
+            bgColor = colors.bgGreen;
+            icon = <HiDownload size={sizeIcon} />;
             break;
-        case 'transfer':
-            title_card = 'Transferência';
+        case "transfer":
+            title_card = "Transferência";
+            bgColor = colors.bgDarkGray;
             break;
         default:
-            break;
+            title_card = "Desconhecido";
     }
 
     return (
-        <div>
-            <div>
-                <div>
-                    {icon}
-                    {title_card}
-                </div>
-                <span> {transaction.amount} </span>
-            </div>
-            {transaction.type == 'initial_state' ? '' :
-                <div>
-                    <div>
-                        {transaction.sourceAccount?.name}
-                    </div>
-                    <FaArrowRightLong />
-                    <div>
-                        {transaction.destinationAccount?.name}
-                    </div>
+        <div className="flex flex-col bg-gray w-90 my-2 rounded-xl p-2 text-white">
+            <TitleCard icon={icon} title_card={title_card} amount={transaction.amount} bgColor={bgColor} />
 
-                </div>
-            }
-            {transaction.type == 'tranfer' ?
-                <div>
-                    <p>Saldo em {transaction.sourceAccount?.name} : {transaction.sourceAccount?.balance}</p>
-                    <p>Saldo em {transaction.destinationAccount?.name} : {transaction.sourceAccount?.balance} </p>
-                </div>
 
-                :
-                <div>
-                    <div>{transaction.date}</div>
-                    <div>{transaction.amount}</div>
-                </div>
+            <NameAccountCard
+                type={transaction.type}
+                sourceAccount={transaction.sourceAccount}
+                destinationAccount={transaction.destinationAccount}
+            />
 
-            }
+
+            <DateAmountCard
+                sourceAccount={transaction.sourceAccount}
+                destinationAccount={transaction.destinationAccount}
+                date={transaction.date}
+                type={transaction.type}
+            />
+
         </div>
-
-    )
+    );
 }

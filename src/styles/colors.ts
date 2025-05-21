@@ -7,4 +7,8 @@ export const colors ={
     white:"#fff",
     buttonGreen:"#0B7C01",
     buttonBlue:"#345AF1",
+    bgGreen: "#074C00",
+    bgRed:"#9D1616",
+    bgDarkGray:"#141B14",
+    lightRed: "#D27E7E"
 }
