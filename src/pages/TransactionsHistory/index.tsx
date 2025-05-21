@@ -1,0 +1,48 @@
+import { TransactionsCard } from "../../components/TransactionCard";
+export function TransactionsHistory() {
+    const testTransactions = [
+        {
+          type: 'initial_balance',
+          amount: 1000,
+          date: '2024-05-21',
+          destinationAccount: {
+            name: 'Conta Principal',
+            balance: 1000
+          }
+        },
+        {
+          type: 'sent',
+          amount: 250,
+          date: '2024-05-22',
+          sourceAccount: {
+            name: 'Conta Principal',
+            balance: 750
+          },
+          destinationAccount: {
+            name: 'Mercado',
+            balance: 0
+          }
+        },
+        {
+          type: 'transfer',
+          amount: 400,
+          date: '2024-05-23',
+          sourceAccount: {
+            name: 'Conta Principal',
+            balance: 350
+          },
+          destinationAccount: {
+            name: 'Conta Poupança',
+            balance: 1400
+          }
+        }
+      ];
+    
+    return(
+<>
+{testTransactions.map((t, index) => (
+          <TransactionsCard key={index} {...t} />
+        ))}
+</>
+    )
+}
