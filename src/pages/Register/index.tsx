@@ -3,12 +3,12 @@ import { MdEdit } from "react-icons/md";
 import { FormInput } from "../../components/FormInput";
 import { LargeButton } from "../../components/LargeButton";
 import { colors } from "../../styles/colors";
-export function Profile() {
+export function Register() {
   return (
 
       <form method="post" className="w-90 min-h-full mx-auto p-6 bg-zinc-900 rounded-2xl text-white space-y-4 shadow-lg">
 
-        <h2 className="text-2xl font-bold text-white text-center">Perfil</h2>
+        <h2 className="text-2xl font-bold text-white text-center">Crie sua conta</h2>
         {/* 
 <div className="flex justify-center relative">
         <img
@@ -32,8 +32,7 @@ export function Profile() {
           </div>
 
         </div>
-        <LargeButton color={colors.buttonBlue} text="Salvar Alterações" icon={<FaCheck color={colors.white} size={20} />} />
-        <LargeButton color={colors.buttonRed} text="Excluir Conta" icon={<FaTrash color={colors.white} size={20} />} />
+        <LargeButton color={colors.buttonBlue} text="Criar Conta" icon={<FaCheck color={colors.white} size={20} />} />
 
 
       </form>

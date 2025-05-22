@@ -1,17 +1,10 @@
 
 import { LargeButton } from "../LargeButton"
 import { colors } from "../../styles/colors"
-export interface IAccountCard {
-    name: string,
-    color: string,
-    type: string,
-    created_at: string
-    updated_at: string
-    description: string
-    balance: number
-}
+import type { IAccount } from "../FormInput"
 
-export function AccountCard({ name, color, type, created_at, updated_at, description, balance }: IAccountCard) {
+
+export function AccountCard({ name, color, type, created_at, updated_at, description, balance }: IAccount) {
     return (
         <article className="text-white my-2 text-base bg-black w-90 p-3 rounded-xl border-t-red-100 border-t-3" style={{ borderTopColor: color }}>
             <div className="text-xl">{name}</div>

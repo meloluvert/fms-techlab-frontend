@@ -5,19 +5,7 @@ import { HiDownload } from "react-icons/hi";
 import { colors } from "../../styles/colors";
 import { TitleCard } from "./TitleCard";
 import { DateAmountCard } from "./DateAmountCard";
-export interface ITransaction {
-    type: string;
-    amount: number; // valor transferido
-    sourceAccount?: {
-        name: string;
-        balance: number;
-    };
-    destinationAccount?: {
-        name: string;
-        balance: number;
-    };
-    date: string;
-}
+import type { ITransaction } from "../../interfaces";
 
 export function TransactionsCard(transaction: ITransaction) {
     let title_card: string | null = null;
