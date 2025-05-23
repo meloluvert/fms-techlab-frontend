@@ -50,6 +50,7 @@ export function EditAccount({account, accountTypes}:{account:IAccount,accountTyp
           text="Editar Conta"
           color={colors.buttonBlue}
           icon={<FaCheck />}
+          route=""
         />
 
         <LargeButton

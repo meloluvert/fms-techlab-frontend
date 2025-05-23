@@ -5,7 +5,7 @@ import { LargeButton } from "../../../components/Buttons/LargeButton";
 import { useState } from "react";
 import { TransferTable } from "../../../components/TransferTable";
 import { colors } from "../../../styles/colors";
-import type { IAccount } from "../../../interfaces";
+import type { IAccount, IAccountType } from "../../../interfaces";
 export const accounts: IAccount[] = [
   {
     id: "1",
@@ -26,6 +26,25 @@ export const accounts: IAccount[] = [
     id: "4",
     name: "Carteira Digital",
     balance: "15222",
+  },
+];
+
+export const accountsTypes: IAccountType[] = [
+  {
+    id: "1",
+    name: "Conta Principal",
+  },
+  {
+    id: "2",
+    name: "Poupança",
+  },
+  {
+    id: "3",
+    name: "Investimentos",
+  },
+  {
+    id: "4",
+    name: "Carteira Digital",
   },
 ];
 //se o usuário clickar em nova transferência,

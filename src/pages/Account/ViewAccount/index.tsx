@@ -59,7 +59,7 @@ export function ViewAccount({
           icon={<FaFilter color={colors.white} size={15} />}
         />
       </div>
-      <div className="w-full flex flex-col items-center justify-center">
+      <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4  gap-4 ">
         {transactions.map((t, index) => (
           <TransactionsCard key={index} {...t} />
         ))}

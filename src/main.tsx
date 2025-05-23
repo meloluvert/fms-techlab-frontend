@@ -8,8 +8,9 @@ import { Register } from "./pages/User/Register";
 import { ViewAccount } from "./pages/Account/ViewAccount";
 import { contaX } from "./App";
 import { testTransactions } from "./pages/Transactions/TransactionsHistory";
-import { NewTransaction } from "./pages/Transactions/NewTransaction";
+import { accountsTypes, NewTransaction } from "./pages/Transactions/NewTransaction";
 import { accounts } from "./pages/Transactions/NewTransaction";
+import { EditAccount } from "./pages/Account/EditAccount";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/entrar", element: <Login /> },
       { path: "/cadastro", element: <Register /> },
+      { path: "/conta/editar/:id", element: <EditAccount account={contaX} accountTypes={accountsTypes}/> },
       { path: "/conta/:id", element: <ViewAccount account={contaX} transactions={testTransactions}/> },
       { path: "/transferir/:id", element: <NewTransaction fixedAccount={contaX} accounts={accounts}/> },
       { path: "/transferir/", element: <NewTransaction accounts={accounts}/> },

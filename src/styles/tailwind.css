@@ -15,4 +15,10 @@
   --color-bgRed: #9D1616;
   --color-bgDarkGray: #141B14;
   --color-lightRed: #D27E7E;
+/* breakpoints */
+  --breakpoint-xs:30rem;
+  --breakpoint-tablet: 40rem;
+  --breakpoint-laptop: 64rem;
+  --breakpoint-desktop: 80rem;
+
 }

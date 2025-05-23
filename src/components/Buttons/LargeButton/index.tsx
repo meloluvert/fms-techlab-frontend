@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export interface ILargeButton {
   color: string;
   text: string;
-  route: string;
+  route?: string;
   icon?: ReactNode;
   onClick?: () => void;
   type?: string

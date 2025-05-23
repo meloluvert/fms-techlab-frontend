@@ -1,9 +1,16 @@
-import { AccountCard } from "../../components/AccountCard"
+import { AccountCard } from "../../components/AccountCard";
+import { contaX } from "../../App";
 export function Home() {
-    return(
-        <main className="flex flex-col items-center ">
-        <AccountCard name="ContaX" updated_at="17/05/2025" created_at="05/05/2025" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ultrices cursus velit et tempus. Etiam et nulla mi. Pellentesque non congue felis, sit amet congue ex. Vivamus" color="#F90000" type="Débito" balance="12" id="12"/>
-        <AccountCard name="ContaX" id="232" updated_at="17/05/2025" created_at="05/05/2025" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ultrices cursus velit et tempus. Etiam et nulla mi. Pellentesque non congue felis, sit amet congue ex. Vivamus" color="#F90000" type="Débito" balance="12"/>
-        </main>
-    )
+  return (
+    <main className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-2 gap-4 ">
+    <AccountCard account={contaX} />
+  <AccountCard account={contaX} />
+  <AccountCard account={contaX} />
+  <AccountCard account={contaX} />
+  <AccountCard account={contaX} />
+  <AccountCard account={contaX} />
+  <AccountCard account={contaX} />
+</main>
+
+  );
 }
