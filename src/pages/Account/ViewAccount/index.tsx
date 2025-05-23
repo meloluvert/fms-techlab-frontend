@@ -1,32 +1,69 @@
-import type { IAccount } from "../../../components/FormInput";
+import type { IAccount } from "../../../interfaces";
 import type { ITransaction } from "../../../interfaces";
-import { LargeButton } from "../../../components/LargeButton";
+import { MdEdit } from "react-icons/md";
+import { FaTrash } from "react-icons/fa";
+import { LargeButton } from "../../../components/Buttons/LargeButton";
 import { colors } from "../../../styles/colors";
 import { TransactionsCard } from "../../../components/TransactionCard";
-export function ViewAccount({ account, transactions }: { account: IAccount; transactions: ITransaction[]; }) {
-  return (
+import { SmallButton } from "../../../components/Buttons/SmallButton";
+import { FaFilter } from "react-icons/fa";
 
-    <div className="border-t-10 -mt-3 w-full p-1" style={{ borderTopColor: account.color }}>
-      <h2 className="text-white text-3xl p-2">{account.name}</h2>
-      <div className="text-disabled text-xs flex justify-between">
-        <div className="text-sm">Atualizado em {account.updated_at}</div>
-        <div className="text-sm">Criado em {account.created_at}</div>
+export function ViewAccount({
+  account,
+  transactions,
+}: {
+  account: IAccount;
+  transactions: ITransaction[];
+}) {
+  return (
+    <div
+      className="border-t-10 -mt-3 w-full p-2"
+      style={{ borderTopColor: account.color }}
+    >
+      <div className="flex w-full justify-between ">
+        <span className="text-white text-3xl w-1/2 p-2">{account.name}</span>
+        <div className="w-1/2 flex flex-row items-center justify-end gap-1">
+          <SmallButton
+            color={colors.buttonRed}
+            icon={<FaTrash color={colors.white} size={15} />}
+          />
+          <SmallButton
+            color={colors.buttonBlue}
+            icon={<MdEdit color={colors.white} size={15} />}
+          />
+        </div>
       </div>
-      <p className="text-white">{account.description}</p>
-      <span className="text-left text-xl text-golden">R$ {account.balance}</span>
-      
-        <div className="w-full px-3 flex justify-center">
+      <div className="text-disabled text-xs flex justify-around">
+        <div className="text-base flex flex-col w-1/2">
+          <span>Atualizado em</span>
+          <span> {account.updated_at}</span>
+        </div>
+        <div className="text-base flex flex-col w-1/2">
+          <span>Criado em</span>
+          <span> {account.created_at}</span>
+        </div>
+      </div>
+      <p className="text-white text-justify">{account.description}</p>
+      <div>
+        <p className="text-right  py-2 text-3xl text-golden">
+          R$ {account.balance}
+        </p>
+      </div>
+      <div className="w-full px-3 flex justify-center">
         <LargeButton color={colors.buttonGreen} text="Tranferir" />
       </div>
+      <div className="flex flex-row text-white p-2 w-full justify-between items-center">
+        <span>Histórico de Transações</span>
+        <SmallButton
+          color={colors.white}
+          icon={<FaFilter color={colors.white} size={15} />}
+        />
+      </div>
       <div className="w-full flex flex-col items-center justify-center">
-      {transactions.map((t, index) => (
-        <TransactionsCard key={index} {...t} />
-      ))}
+        {transactions.map((t, index) => (
+          <TransactionsCard key={index} {...t} />
+        ))}
       </div>
     </div>
-
-
-
-
-  )
+  );
 }

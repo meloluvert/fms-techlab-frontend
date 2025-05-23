@@ -11,6 +11,10 @@ export interface ITransaction {
     };
     date: string;
 }
+export interface IAccountType{
+    name: string,
+    id:string
+}
 export interface IAccount {
     name: string;
     id: string;
@@ -30,5 +34,5 @@ export interface IForm {
     type: "text" | "number" | "select" | "password"; // pode expandir depois
     value?: string | number;
     onChange?: (value: any) => void;
-    options?: IAccount[]; // apenas se type = "select"
+    options?: IAccountType[] | IAccount[] | undefined; // apenas se type = "select"
   }
