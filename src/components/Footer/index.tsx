@@ -6,7 +6,9 @@ export interface INav {
 export function Footer({ page }: INav) {
   return (
     <footer className="w-full p-2 w-1-4 bg-black flex fixed bottom-0 justify-around">
+       <div className="md:hidden w-screen fixed bottom-0">
       <Nav page={page}/>
+       </div>
     </footer>
   );
 }

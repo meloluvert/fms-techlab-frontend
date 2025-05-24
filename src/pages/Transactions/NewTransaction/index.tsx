@@ -65,7 +65,7 @@ export function NewTransaction({
   const toAccount = accounts.find((acc) => acc.id === toId)!;
 
   return (
-    <form className="w-full  rounded-2xl p-5" method="POST">
+    <form className="w-full  rounded-2xl md:max-w-160 p-5" method="POST">
       <h2 className="text-2xl font-bold text-white text-left">
         Nova transação
       </h2>
@@ -110,7 +110,7 @@ export function NewTransaction({
         toBalance={Number(toAccount.balance) / 100}
         transferValue={value}
       />
-      <div className=" py-5 flex flex-col gap-2">
+      <div className=" py-5 flex flex-col sm:flex-row gap-2">
         <LargeButton
           text="Realizar transferência"
           color={colors.bgGreen}

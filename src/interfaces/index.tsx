@@ -36,3 +36,10 @@ export interface IForm {
     onChange?: (value: any) => void;
     options?: IAccountType[] | IAccount[] | undefined; // apenas se type = "select"
   }
+
+  export interface IUser{
+    id: string
+    password?: string
+    name: string
+    email:string
+  }

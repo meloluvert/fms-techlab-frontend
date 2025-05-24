@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 export interface ILargeButton {
   color: string;
   text: string;
-  route?: string;
+  route: string;
   icon?: ReactNode;
   onClick?: () => void;
-  type?: string
+  type?: "button" | "submit" | "reset" | undefined
 }
 
 export function LargeButton({ color, text, route, icon, onClick, type }: ILargeButton) {

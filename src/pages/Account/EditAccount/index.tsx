@@ -6,7 +6,7 @@ import type { IAccountType } from "../../../interfaces";
 import type { IAccount } from "../../../interfaces";
 export function EditAccount({account, accountTypes}:{account:IAccount,accountTypes:IAccountType[]}) {
   return (
-    <form className="w-full  rounded-2xl p-5" action="">
+    <form className="w-full lg:max-w-160 rounded-2xl p-5" action="">
       <h2 className="text-2xl font-bold text-white text-left">Nova Conta</h2>
       <FormInput
         name={"name"}

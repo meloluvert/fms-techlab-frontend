@@ -6,7 +6,7 @@ import { FaCheck, FaTrash } from "react-icons/fa";
 import type { IAccountType } from "../../../interfaces";
 export function NewAccount({accountTypes}:{accountTypes:IAccountType[]}) {
   return (
-    <form className="w-full  rounded-2xl p-5" action="">
+    <form className="w-full  rounded-2xl md:max-w-140 p-5" action="">
       <h2 className="text-2xl font-bold text-white text-left">Nova Conta</h2>
       <FormInput
         name={"name"}
@@ -29,7 +29,7 @@ export function NewAccount({accountTypes}:{accountTypes:IAccountType[]}) {
         placeholder="R$ 0.00"
         step="0.01"
       />
-      <label htmlFor="description" className="text-white text-sm mb-1">
+      <label htmlFor="description" className="text-white font-bold text-sm mb-1">
         Descrição
       </label>
       <textarea
@@ -39,7 +39,7 @@ export function NewAccount({accountTypes}:{accountTypes:IAccountType[]}) {
         id="description"
         name="description"
       />
-      <div className=" py-5 flex flex-col gap-2">
+      <div className=" py-5 flex flex-col gap-2 sm:flex-row">
         <LargeButton
           text="Criar Conta"
           color={colors.buttonBlue}

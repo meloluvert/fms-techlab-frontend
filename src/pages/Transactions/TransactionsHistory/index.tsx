@@ -1,4 +1,5 @@
 import { TransactionsCard } from "../../../components/TransactionCard";
+import type { ITransaction } from "../../../interfaces";
 export const testTransactions = [
   {
     type: 'received',
@@ -34,14 +35,53 @@ export const testTransactions = [
       name: 'Conta Poupança',
       balance: 1400
     }
+  },
+  {
+    type: 'initial_balance',
+    amount: 400,
+    date: '2024-05-23',
+    sourceAccount: {
+      name: 'Conta Principal',
+      balance: 350
+    },
+    destinationAccount: {
+      name: 'Conta Poupança',
+      balance: 1400
+    }
+  },
+  {
+    type: 'initial_balance',
+    amount: 400,
+    date: '2024-05-23',
+    sourceAccount: {
+      name: 'Conta Principal',
+      balance: 350
+    },
+    destinationAccount: {
+      name: 'Conta Poupança',
+      balance: 1400
+    }
+  },
+  {
+    type: 'received',
+    amount: 400,
+    date: '2024-05-23',
+    sourceAccount: {
+      name: 'Conta Principal',
+      balance: 350
+    },
+    destinationAccount: {
+      name: 'Conta Poupança',
+      balance: 1400
+    }
   }
 ];
-export function TransactionsHistory() {
+export function TransactionsHistory({transactions}:{transactions:ITransaction[]}) {
 
 
   return (
-      <div className="flex flex-col items-center justify-center w-full">
-        {testTransactions.map((t, index) => (
+    <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4  gap-4 ">
+        {transactions.map((t, index) => (
           <TransactionsCard key={index} {...t} />
         ))}
       </div>

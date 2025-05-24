@@ -11,6 +11,9 @@ import { testTransactions } from "./pages/Transactions/TransactionsHistory";
 import { accountsTypes, NewTransaction } from "./pages/Transactions/NewTransaction";
 import { accounts } from "./pages/Transactions/NewTransaction";
 import { EditAccount } from "./pages/Account/EditAccount";
+import { TransactionsHistory } from "./pages/Transactions/TransactionsHistory";
+import { Profile, userFic } from "./pages/User/Profile";
+import { NewAccount } from "./pages/Account/NewAccount";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -20,9 +23,13 @@ const router = createBrowserRouter([
       { path: "/entrar", element: <Login /> },
       { path: "/cadastro", element: <Register /> },
       { path: "/conta/editar/:id", element: <EditAccount account={contaX} accountTypes={accountsTypes}/> },
+      { path: "/conta/nova/", element: <NewAccount accountTypes={accountsTypes}/> },
       { path: "/conta/:id", element: <ViewAccount account={contaX} transactions={testTransactions}/> },
       { path: "/transferir/:id", element: <NewTransaction fixedAccount={contaX} accounts={accounts}/> },
       { path: "/transferir/", element: <NewTransaction accounts={accounts}/> },
+      { path: "/transferencias/", element: <TransactionsHistory transactions={testTransactions} /> },
+      { path: "/perfil", element: <Profile userInfo={userFic}/> },
+      
 
     ],
   },

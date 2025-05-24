@@ -17,17 +17,33 @@ export const contaX: IAccount = {
 
 function App() {
   const location = useLocation();
+  let page: string = '';
+  switch (location.pathname) {
+    case "/":
+      page = "home";
+      break;
+    case "/perfil":
+      page = "perfil";
+      break;
+    case "/transferencias":
+      page = "transacoes";
+      break;
+
+    default:
+      break;
+  }
+  console.log(location.pathname)
   // Lista de rotas onde o Footer NÃO deve aparecer
   const hideFooterRoutes = ["/entrar", "/cadastro"];
   const shouldShowFooter = !hideFooterRoutes.includes(location.pathname);
 
   return (
     <>
-      <Header />
+      <Header page={page} />
       <div className="flex items-center pt-3 pb-25 justify-center">
         <Outlet />
       </div>
-      {shouldShowFooter && <Footer page={"home"} />}
+      {shouldShowFooter && <Footer page={page} />}
     </>
   );
 }

@@ -12,12 +12,14 @@ export function FormInput({
 }: IForm) {
   return (
     <div className="flex flex-col mb-2">
-      <label htmlFor={name} className="text-white text-sm mb-1">
+      <label htmlFor={name} className="text-white text-sm font-bold mb-1">
         {label}
       </label>
 
       {type === "select" && options ? (
         <select
+         disabled={options.length === 1 ? true : false}
+
           id={name}
           onChange={(e) => onChange?.(e.target.value)}
           className="w-full px-4 py-2 bg-zinc-800 rounded-full text-white outline-none"

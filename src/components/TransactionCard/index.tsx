@@ -37,7 +37,8 @@ export function TransactionsCard(transaction: ITransaction) {
     }
 
     return (
-        <div className="flex flex-col bg-gray w-90 my-2 rounded-xl p-2 text-white">
+        <div className="flex w-full justify-center">
+        <div className="flex flex-col bg-gray w-90 xl:w-75 lg:w-75 my-2 rounded-xl p-2 text-white">
             <TitleCard icon={icon} title_card={title_card} amount={transaction.amount} bgColor={bgColor} />
 
 
@@ -55,6 +56,7 @@ export function TransactionsCard(transaction: ITransaction) {
                 type={transaction.type}
             />
 
+        </div>
         </div>
     );
 }

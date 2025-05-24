@@ -3,11 +3,18 @@ import { MdEdit } from "react-icons/md";
 import { FormInput } from "../../../components/FormInput";
 import { LargeButton } from "../../../components/Buttons/LargeButton";
 import { colors } from "../../../styles/colors";
-export function Profile() {
+import type { IUser } from "../../../interfaces";
+export const userFic:IUser= {
+  id:'1',
+  name:"João",
+  email: "joao@gmail.com"
+}
+
+export function Profile({userInfo}:{userInfo:IUser}) {
   return (
     <form
       method="post"
-      className="w-90 min-h-full mx-auto p-6 bg-zinc-900 rounded-2xl text-white space-y-4 shadow-lg"
+      className="w-90 min-h-full  mx-auto p-6 bg-zinc-900 rounded-2xl text-white space-y-4 shadow-lg"
     >
       <h2 className="text-2xl font-bold text-white text-center">Perfil</h2>
       {/* 
@@ -26,12 +33,14 @@ export function Profile() {
       <div className="space-y-2">
         <FormInput
           name={"name"}
+          value={userInfo.name}
           type={"text"}
           placeholder={"João da Silva Santos"}
           label={"Nome"}
         />
         <FormInput
           name={"email"}
+          value={userInfo.email}
           type={"text"}
           placeholder={"joao@email.com"}
           label={"Email"}
@@ -42,6 +51,7 @@ export function Profile() {
             type={"password"}
             placeholder={"*********"}
             label={"Senha"}
+
           />
         </div>
       </div>
