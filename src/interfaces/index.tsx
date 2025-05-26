@@ -13,7 +13,7 @@ export interface ITransaction {
 }
 export interface IAccountType{
     name: string,
-    id:string
+    id?:string
 }
 export interface IAccount {
     name: string;
@@ -31,10 +31,11 @@ export interface IForm {
     label?: string;
     step?:string
     placeholder?: string;
-    type: "text" | "number" | "select" | "password"; // pode expandir depois
-    value?: string | number;
-    onChange?: (value: any) => void;
+    type: "text" | "number" | "select" | "password" | "email"; // pode expandir depois
+    value: string | number;
+    onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
     options?: IAccountType[] | IAccount[] | undefined; // apenas se type = "select"
+    required?: boolean;
   }
 
   export interface IUser{
@@ -43,3 +44,6 @@ export interface IForm {
     name: string
     email:string
   }
+
+
+  

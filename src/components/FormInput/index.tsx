@@ -9,6 +9,7 @@ export function FormInput({
   onChange,
   options,
   step,
+  required
 }: IForm) {
   return (
     <div className="flex flex-col mb-2">
@@ -21,7 +22,7 @@ export function FormInput({
          disabled={options.length === 1 ? true : false}
 
           id={name}
-          onChange={(e) => onChange?.(e.target.value)}
+          onChange={onChange}
           className="w-full px-4 py-2 bg-zinc-800 rounded-full text-white outline-none"
         >
           {options.map((opt) => (
@@ -33,13 +34,16 @@ export function FormInput({
       ) : (
         <input
           id={name}
+          name={name}
           type={type}
           step={step}
           min={type === "number" ? 0 : undefined}
           placeholder={placeholder}
           className="w-full px-4 py-2 bg-zinc-800 rounded-full text-white outline-none placeholder:text-zinc-400"
           value={value}
-          onChange={(e) => onChange && onChange(e.target.value)}
+          onChange={onChange}
+
+          required={required ? true : false}
         />
       )}
     </div>
