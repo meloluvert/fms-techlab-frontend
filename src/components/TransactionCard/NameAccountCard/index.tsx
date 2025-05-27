@@ -1,16 +1,11 @@
 import { FaArrowRightLong } from "react-icons/fa6";
 import { colors } from "../../../styles/colors";
+import type { IAccount, IAccountType } from "../../../interfaces";
 
 export interface IAccountCard {
-  type: string;
-  sourceAccount?: {
-    name: string;
-    balance: number;
-  };
-  destinationAccount?: {
-    name: string;
-    balance: number;
-  };
+  type?: string;
+  sourceAccount?: IAccount | null;
+  destinationAccount?: IAccount;
 }
 
 export function NameAccountCard({ type, sourceAccount, destinationAccount }: IAccountCard) {

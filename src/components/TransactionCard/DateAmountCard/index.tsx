@@ -1,14 +1,10 @@
+import type { IAccount, IAccountType } from "../../../interfaces";
+
 interface IDateAmountProps {
-    type: string
-    sourceAccount?: {
-        name: string;
-        balance: number;
-    };
-    destinationAccount?: {
-        name: string;
-        balance: number;
-    };
-    date: string;
+    type?: string,
+    sourceAccount?:IAccount | null;
+    destinationAccount?: IAccount;
+    date: string | Date;
 }
 
 export function DateAmountCard({ sourceAccount, destinationAccount, date, type }: IDateAmountProps) {

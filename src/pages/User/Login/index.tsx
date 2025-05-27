@@ -4,7 +4,7 @@ import { colors } from "../../../styles/colors";
 import { LargeButton } from "../../../components/Buttons/LargeButton";
 import { FaCheck } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-
+import { Loading } from "../../../components/Loading";
 import { useAuth } from "../../../contexts/auth"; // aqui
 
 export function Login() {
@@ -20,7 +20,6 @@ export function Login() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  console.log("Auth:", { user, token });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -29,7 +28,6 @@ export function Login() {
 
     try {
       const success = await login(formData.email, formData.password);
-      alert(success);
       if (success) {
         navigate("/");
       } else {
@@ -41,7 +39,7 @@ export function Login() {
       setLoading(false);
     }
   };
-
+  if (loading) return <Loading/>
   return (
     <form
       method="post"
@@ -78,13 +76,13 @@ export function Login() {
 
       <LargeButton
         color={colors.buttonBlue}
-        text={loading ? "Entrando..." : "Entrar"}
+        text={"Entrar"}
         icon={<FaCheck color={colors.white} size={20} />}
       />
 
       <div className="underline flex flex-col text-sm items-end ">
         <span>
-          <a href="/cadastro">Não é cadastrado? Clique aqui</a>
+          <a href="/register">Não é cadastrado? Clique aqui</a>
         </span>
       </div>
     </form>

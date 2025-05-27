@@ -30,12 +30,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setLoading(true);
     try {
       const response = await axiosPrivate.post("/user/login", { email, password });
-      console.log(response)
       const { token: receivedToken, user: receivedUser } = response.data;
       setUser(receivedUser);
       setToken(receivedToken);
       localStorage.setItem("token", receivedToken);
-      alert("tudo certo")
       return true;
     } catch (error) {
       console.error("Erro ao fazer login:", error);
@@ -55,7 +53,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
     if (storedToken) {
-      axiosPrivate.get("/user/perfil", {
+      axiosPrivate.get("/user", {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
         .then((res) => {
@@ -75,7 +73,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   
   
   return (
-    <AuthContext.Provider value={{ user, token, login, logout, loading }}>
+    <AuthContext.Provider value={{ user, token, login, logout, loading }} >
       {children}
     </AuthContext.Provider>
   );

@@ -4,7 +4,6 @@ import { FaHome } from "react-icons/fa";
 import { GoArrowSwitch } from "react-icons/go";
 import { MdPerson } from "react-icons/md";
 import { colors } from "../../styles/colors";
-import { Navigate } from "react-router-dom";
 const iconSize = 32;
 
 export function Nav({ page }: INav) {
@@ -73,11 +72,10 @@ export function Nav({ page }: INav) {
                 : "text-disabled"
             } text-xl text-center`}
           >
-            <a href="/transferencias/">Transações</a>
+            <a href="/transactions">Transações</a>
           </span>
         </div>
 
-        {/* PERFIL */}
         <div className="flex px-2 flex-col md:flex-row items-center justify-center">
           <div className="flex justify-center w-full">
             <MdPerson
@@ -90,7 +88,7 @@ export function Nav({ page }: INav) {
               page === "perfil" ? "text-white font-semibold" : "text-disabled"
             } text-xl text-center`}
           >
-            <a href="/perfil">Perfil</a>
+            <a href="/profile">Perfil</a>
           </span>
         </div>
       </nav>

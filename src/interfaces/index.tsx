@@ -1,15 +1,14 @@
 export interface ITransaction {
-    type: string;
+    id:string;
+    destinationBalance?: number,
+    originBalance?: number,
+    type?: string;
     amount: number; // valor transferido
-    sourceAccount?: {
-        name: string;
-        balance: number;
-    };
-    destinationAccount?: {
-        name: string;
-        balance: number;
-    };
-    date: string;
+    sourceAccount?: IAccount | null;
+    originAccount?: IAccount | null;
+    destinationAccount?: IAccount ;
+    description:string
+    created_at: Date;
 }
 export interface IAccountType{
     name: string,
@@ -19,9 +18,9 @@ export interface IAccount {
     name: string;
     id: string;
     balance: string;
-    type?: string;
-    updated_at?:string;
-    created_at?:string;
+    type?: IAccountType;
+    updated_at?:Date;
+    created_at?:Date;
     description?:string;
     color?: string;
 }
@@ -32,10 +31,11 @@ export interface IForm {
     step?:string
     placeholder?: string;
     type: "text" | "number" | "select" | "password" | "email"; // pode expandir depois
-    value: string | number;
-    onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+    value?: string | number;
+    onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
     options?: IAccountType[] | IAccount[] | undefined; // apenas se type = "select"
     required?: boolean;
+    readonly?: boolean
   }
 
   export interface IUser{

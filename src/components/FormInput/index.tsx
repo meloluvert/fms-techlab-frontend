@@ -1,5 +1,4 @@
 import type { IForm } from "../../interfaces";
-
 export function FormInput({
   name,
   label,
@@ -9,7 +8,8 @@ export function FormInput({
   onChange,
   options,
   step,
-  required
+  required,
+  readonly,
 }: IForm) {
   return (
     <div className="flex flex-col mb-2">
@@ -19,12 +19,17 @@ export function FormInput({
 
       {type === "select" && options ? (
         <select
-         disabled={options.length === 1 ? true : false}
-
           id={name}
+          name={name}                  
+          value={value}                
           onChange={onChange}
+          disabled={options.length === 1}
           className="w-full px-4 py-2 bg-zinc-800 rounded-full text-white outline-none"
+          required={required}
         >
+          <option value="" disabled>
+            {placeholder || "Selecione..."}
+          </option>
           {options.map((opt) => (
             <option key={opt.id} value={opt.id}>
               {opt.name}
@@ -42,8 +47,8 @@ export function FormInput({
           className="w-full px-4 py-2 bg-zinc-800 rounded-full text-white outline-none placeholder:text-zinc-400"
           value={value}
           onChange={onChange}
-
-          required={required ? true : false}
+          required={required}
+          readOnly={readonly}
         />
       )}
     </div>

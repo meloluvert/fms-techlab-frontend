@@ -1,89 +1,70 @@
-import { TransactionsCard } from "../../../components/TransactionCard";
+import { useAuth } from "../../../contexts/auth";
+import { useEffect, useState } from "react";
+import { axiosPrivate } from "../../../services/api";
 import type { ITransaction } from "../../../interfaces";
-export const testTransactions = [
-  {
-    type: 'received',
-    amount: 1000,
-    date: '2024-05-21',
+import { TransactionsCard } from "../../../components/TransactionCard";
+import { Loading } from "../../../components/Loading";
+export function mapTransactionFromApi(t: any): ITransaction {
+  return {
+    id: t.id,
+    type: t.originAccount === null ? "initial_balance" : "transfer",
+    amount: t.amount,
+    created_at: t.created_at,
+    destinationBalance: undefined,
+    originBalance: undefined,
+    description: t.description,
+    sourceAccount: t.originAccount
+      ? {
+          id: t.originAccount.id,
+          name: t.originAccount.name,
+          balance: t.originBalance,
+          color: t.originAccount.color,
+          description: t.originAccount.description,
+        }
+      : null,
     destinationAccount: {
-      name: 'Conta Principal',
-      balance: 1000
-    }
-  },
-  {
-    type: 'sent',
-    amount: 250,
-    date: '2024-05-22',
-    sourceAccount: {
-      name: 'Conta Principal',
-      balance: 750
+      id: t.destinationAccount.id,
+      name: t.destinationAccount.name,
+      balance: t.destinationBalance,
+      color: t.destinationAccount.color,
+      description: t.destinationAccount.description,
     },
-    destinationAccount: {
-      name: 'Mercado',
-      balance: 0
-    }
-  },
-  {
-    type: 'initial_balance',
-    amount: 400,
-    date: '2024-05-23',
-    sourceAccount: {
-      name: 'Conta Principal',
-      balance: 350
-    },
-    destinationAccount: {
-      name: 'Conta Poupança',
-      balance: 1400
-    }
-  },
-  {
-    type: 'initial_balance',
-    amount: 400,
-    date: '2024-05-23',
-    sourceAccount: {
-      name: 'Conta Principal',
-      balance: 350
-    },
-    destinationAccount: {
-      name: 'Conta Poupança',
-      balance: 1400
-    }
-  },
-  {
-    type: 'initial_balance',
-    amount: 400,
-    date: '2024-05-23',
-    sourceAccount: {
-      name: 'Conta Principal',
-      balance: 350
-    },
-    destinationAccount: {
-      name: 'Conta Poupança',
-      balance: 1400
-    }
-  },
-  {
-    type: 'received',
-    amount: 400,
-    date: '2024-05-23',
-    sourceAccount: {
-      name: 'Conta Principal',
-      balance: 350
-    },
-    destinationAccount: {
-      name: 'Conta Poupança',
-      balance: 1400
-    }
-  }
-];
-export function TransactionsHistory({transactions}:{transactions:ITransaction[]}) {
+  };
+}
 
+export function TransactionsHistory() {
+  const { user, token } = useAuth();
+  const [loading, setLoading] = useState(true);
+  const [transactions, setTransactions] = useState<ITransaction[]>([]);
+
+  useEffect(() => {
+    if (!token || !user) return;
+    setLoading(true);
+
+    axiosPrivate
+      .get("/transactions")
+      .then((res) => {
+        const mapped = res.data.map(mapTransactionFromApi);
+        console.log(mapTransactionFromApi)
+        setTransactions(mapped);
+      })
+      .catch((err) => {
+        setTransactions([]);
+        console.error("Erro ao buscar transações:", err);
+      })
+      .finally(() => setLoading(false));
+  }, [token, user]);
+
+  if (loading) return <Loading/>;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4  gap-4 ">
+    <main>
+      <h2 className="text-white text-4xl">Histórico de Transações</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4  gap-4 ">
         {transactions.map((t, index) => (
           <TransactionsCard key={index} {...t} />
         ))}
       </div>
-      )
+    </main>
+  );
 }

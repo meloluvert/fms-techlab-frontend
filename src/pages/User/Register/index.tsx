@@ -100,7 +100,13 @@ export function Register() {
         icon={<FaCheck color={colors.white} size={20}
         type="submit" 
         />}
+
       />
+      <div className="underline flex flex-col text-sm items-end ">
+        <span>
+          <a href="/login">Já é cadastrado? Clique aqui</a>
+        </span>
+      </div>
     </form>
   );
 }
