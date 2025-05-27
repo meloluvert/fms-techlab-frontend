@@ -23,7 +23,7 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<IUser | null>(null);
   const [token, setToken] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   // Função de login
   const login = async (email: string, password: string): Promise<boolean> => {
@@ -52,9 +52,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     localStorage.removeItem("token");
   };
   
-  // Carrega usuário se houver token salvo no localStorage
   useEffect(() => {
-    setLoading(true);
     const storedToken = localStorage.getItem("token");
     if (storedToken) {
       axiosPrivate.get("/user/perfil", {
@@ -72,6 +70,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setLoading(false);
     }
   }, []);
+  
   
   
   

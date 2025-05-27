@@ -4,7 +4,7 @@ import { FaHome } from "react-icons/fa";
 import { GoArrowSwitch } from "react-icons/go";
 import { MdPerson } from "react-icons/md";
 import { colors } from "../../styles/colors";
-
+import { Navigate } from "react-router-dom";
 const iconSize = 32;
 
 export function Nav({ page }: INav) {
@@ -73,7 +73,7 @@ export function Nav({ page }: INav) {
                 : "text-disabled"
             } text-xl text-center`}
           >
-            <a href="/transferencias">Transações</a>
+            <a href="/transferencias/">Transações</a>
           </span>
         </div>
 
