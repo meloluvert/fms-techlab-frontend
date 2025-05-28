@@ -91,7 +91,8 @@ export function NewTransaction() {
   };
 
   if (loading) return <Loading/>;
-  if (!accounts.length) return <div>Nenhuma conta encontrada.</div>;
+  if (!accounts.length) return <div className="text-white">Nenhuma conta encontrada.</div>;
+  if (accounts.length == 1) return <div className="text-white">Você precisa de duas contas para transferir</div>;
 
   return (
     <form

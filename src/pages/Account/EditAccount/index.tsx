@@ -83,10 +83,11 @@ export function EditAccount() {
     try {
       await axiosPrivate.put(`/accounts/${id}`, {
         name: form.name,
-        type_id: Number(form.type_id), // ajuste para o formato do backend
+        type_id: form.type_id, 
         description: form.description,
         color: form.color,
       });
+      console.log(form.type_id)
       navigate(`/account/${id}`); // redireciona para a página de detalhes
     } catch (err: any) {
       setError(err?.response?.data?.message || "Erro ao atualizar conta.");

@@ -7,20 +7,27 @@ export function SmallButton({
   color,
   onClick,
 }: {
-  route: string;
+  route?: string;
   icon: ReactNode;
   color: string;
   onClick?: () => void;
 }) {
   return (
-    <Link to={route} className="block w-full">
+    route ? <Link to={route} className="block w-full">
+    <button
+      className="rounded-full bg-black border-1 border-white p-2.5"
+      style={{ borderColor: color }}
+      onClick={onClick}
+    >
+      {icon}
+    </button>
+  </Link> : 
       <button
-        className="rounded-full bg-black border-1 border-white p-2.5"
+        className="rounded-full w-fit block bg-black border-1 border-white p-2.5"
         style={{ borderColor: color }}
         onClick={onClick}
       >
         {icon}
       </button>
-    </Link>
   );
 }

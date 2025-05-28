@@ -91,6 +91,7 @@ export function ViewAccount() {
             <span className="text-white text-3xl sm:text-5xl w-1/2 p-2">
               {account.name}
             </span>
+            
             <div className="w-1/2 flex flex-row items-center justify-end gap-1">
               <div>
                 <SmallButton
@@ -106,9 +107,14 @@ export function ViewAccount() {
                   route={`/account/edit/${account.id}`}
                 />
               </div>
+
             </div>
+            
           </div>
         </div>
+        <span className="text-white text-base sm:text-base w-1/2 p-2">
+              {account.type?.name}
+            </span>
         <div className="text-disabled text-xs flex justify-around">
           <div className="text-base flex gap-2 flex-col sm:flex-row w-1/2">
             <span>Atualizado em </span>

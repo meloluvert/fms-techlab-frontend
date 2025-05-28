@@ -6,12 +6,17 @@ import { accountRoutes } from "./privateRoutes/accountRoutes";
 import { transactionRoutes } from "./privateRoutes/transactionRoutes";
 import { ProtectedRoute } from "../components/ProtectedRoute";
 import { userRoutes } from "./privateRoutes/userRoutes";
+import { accountTypesRoutes } from "./privateRoutes/accountTypeRoutes";
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />, // <- TUDO deve ficar DENTRO do App (com Outlet)
     children: [
       ...publicRoutes, // login, cadastro
+      ...accountTypesRoutes.map((route) => ({
+        ...route,
+        element: <ProtectedRoute>{route.element}</ProtectedRoute>,
+      })),
       ...userRoutes.map((route) => ({
         ...route,
         element: <ProtectedRoute>{route.element}</ProtectedRoute>,
