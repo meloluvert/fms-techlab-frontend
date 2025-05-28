@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 interface ITitleCardProps {
   icon: ReactNode;
   title_card: string;
-  amount: number;
+  amount: string | number;
   bgColor: string;
 }
 

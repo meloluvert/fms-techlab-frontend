@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 export interface ITransaction {
     id:string;
     destinationBalance?: number,
@@ -19,8 +21,8 @@ export interface IAccount {
     id: string;
     balance: string;
     type?: IAccountType;
-    updated_at?:Date;
-    created_at?:Date;
+    updated_at?:Date | string;
+    created_at?:Date | string;
     description?:string;
     color?: string;
 }

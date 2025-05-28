@@ -12,14 +12,14 @@ export function AccountCard({ account }: { account: IAccount }) {
       <div>{account.type?.name || "Tipo desconhecido"}</div>
       <div className="text-disabled text-xs flex justify-between">
         <div className="text-l">
-          Atualizado em {new Date(account.updated_at).toLocaleDateString()}
+          Atualizado em {String(account.updated_at)}
         </div>
-        <div>Criado em {new Date(account.created_at).toLocaleDateString()}</div>
+        <div>Criado em {String(account.created_at)}</div>
       </div>
       <p className="text-justify">{account.description}</p>
 
       <p className="text-right text-xl text-golden">
-        R$ {Number(account.balance).toFixed(2)}
+        R$ {account.balance}
       </p>
 
       <div className="flex flex-col xs:flex-row  justify-between w-full py-2 gap-2">

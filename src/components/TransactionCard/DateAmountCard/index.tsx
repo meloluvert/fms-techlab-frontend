@@ -2,12 +2,14 @@ import type { IAccount, IAccountType } from "../../../interfaces";
 
 interface IDateAmountProps {
     type?: string,
-    sourceAccount?:IAccount | null;
-    destinationAccount?: IAccount;
+    sourceAccountBalance?:string | Number;
+    destinationAccountBalance?: string | Number;
     date: string | Date;
+    destinationAccount?: IAccount;
+    sourceAccount?:IAccount | null
 }
 
-export function DateAmountCard({ sourceAccount, destinationAccount, date, type }: IDateAmountProps) {
+export function DateAmountCard({ destinationAccount, sourceAccount,sourceAccountBalance, destinationAccountBalance, date, type }: IDateAmountProps) {
     
     return (type == "initial_balance") ? (
         <div className="flex flex-row justify-between items-center">
@@ -15,7 +17,7 @@ export function DateAmountCard({ sourceAccount, destinationAccount, date, type }
                 {date}
             </div>
             <div className="text-golden">
-                R$ {destinationAccount?.balance}
+                R$ {destinationAccountBalance}
             </div>
         </div>
     ) : (
@@ -25,13 +27,13 @@ export function DateAmountCard({ sourceAccount, destinationAccount, date, type }
             </div>
             <p>
                 Saldo em {sourceAccount?.name}:{" "}
-                <span className="text-golden">R$ {sourceAccount?.balance}</span>
+                <span className="text-golden">R$ {sourceAccountBalance}</span>
             </p>
 
 
             <p>
                 Saldo em {destinationAccount?.name}:{" "}
-                <span className="text-golden">R$ {destinationAccount?.balance}</span>
+                <span className="text-golden">R$ {destinationAccountBalance}</span>
             </p>
         </div>
   )

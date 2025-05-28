@@ -82,7 +82,7 @@ export function NewAccount() {
       await axiosPrivate.post("/accounts", {
         name: form.name,
         type_id: Number(form.type_id),
-        balance: Number(form.balance),
+         balance: Math.round(Number(form.balance) * 100),
         description: form.description,
         color: form.color,
       });

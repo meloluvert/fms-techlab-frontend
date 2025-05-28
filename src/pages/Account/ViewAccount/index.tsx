@@ -11,7 +11,6 @@ import { GoArrowSwitch } from "react-icons/go";
 import { axiosPrivate } from "../../../services/api";
 import type { IAccount, ITransaction } from "../../../interfaces";
 import { Loading } from "../../../components/Loading";
-import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 export function ViewAccount() {
   const { id } = useParams<{ id: string }>();
@@ -113,18 +112,18 @@ export function ViewAccount() {
         <div className="text-disabled text-xs flex justify-around">
           <div className="text-base flex gap-2 flex-col sm:flex-row w-1/2">
             <span>Atualizado em </span>
-            <span>{new Date(account.updated_at).toLocaleString()}</span>
+            <span>{String(account.updated_at)}</span>
           </div>
           <div className="text-base flex gap-2 flex-col sm:flex-row w-1/2">
             <span>Criado em </span>
-            <span>{new Date(account.created_at).toLocaleString()}</span>
+            <span>{String(account.created_at)}</span>
           </div>
         </div>
         <p className="text-white text-justify">{account.description}</p>
         <div className="flex flex-col sm:flex-row sm:justify-evenly md:justify-around justify-center items-center">
           <div className="md:w-1/3 justify-self-end">
             <p className="text-left md:inline-block md:w-full py-2 text-3xl text-golden">
-              R$ {(Number(account.balance) / 100).toFixed(2)}
+              R$ {account.balance}
             </p>
           </div>
           <div className="w-full md:w-1/3 px-3 flex justify-center items-center max-w-sm">

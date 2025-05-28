@@ -21,7 +21,6 @@ export function EditAccount() {
   const [form, setForm] = useState({
     name: "",
     type_id: "",
-    balance: "",
     description: "",
     color: "#ffffff",
   });
@@ -44,7 +43,6 @@ export function EditAccount() {
         setForm({
           name: accountRes.data.name,
           type_id: accountRes.data.type.id,
-          balance: String( accountRes.data.balance / 100),
           description: accountRes.data.description,
           color: accountRes.data.color,
         });
@@ -79,22 +77,13 @@ export function EditAccount() {
       setError("O tipo da conta é obrigatório.");
       return;
     }
-    if (form.balance === "") {
-      setError("O saldo é obrigatório (pode ser 0).");
-      return;
-    }
-    if (isNaN(Number(form.balance))) {
-      setError("Saldo inválido.");
-      return;
-    }
 
     setLoading(true);
 
     try {
       await axiosPrivate.put(`/accounts/${id}`, {
         name: form.name,
-        type_id: Number(form.type_id),
-        balance: Number(form.balance) * 100, // ajuste para o formato do backend
+        type_id: Number(form.type_id), // ajuste para o formato do backend
         description: form.description,
         color: form.color,
       });
@@ -159,16 +148,6 @@ export function EditAccount() {
           />
         </div>
       </div>
-
-      <FormInput
-        name="balance"
-        type="number"
-        label="Saldo"
-        placeholder="R$ 0.00"
-        step="0.01"
-        value={form.balance}
-        onChange={handleChange}
-      />
 
       <label
         htmlFor="description"

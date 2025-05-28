@@ -10,8 +10,8 @@ export function mapTransactionFromApi(t: any): ITransaction {
     type: t.originAccount === null ? "initial_balance" : "transfer",
     amount: t.amount,
     created_at: t.created_at,
-    destinationBalance: undefined,
-    originBalance: undefined,
+    destinationBalance: t.destinationBalance,
+    originBalance: t.originBalance,
     description: t.description,
     sourceAccount: t.originAccount
       ? {
@@ -22,15 +22,18 @@ export function mapTransactionFromApi(t: any): ITransaction {
           description: t.originAccount.description,
         }
       : null,
-    destinationAccount: {
-      id: t.destinationAccount.id,
-      name: t.destinationAccount.name,
-      balance: t.destinationBalance,
-      color: t.destinationAccount.color,
-      description: t.destinationAccount.description,
-    },
+    destinationAccount: t.destinationAccount
+      ? {
+          id: t.destinationAccount.id,
+          name: t.destinationAccount.name,
+          balance: t.destinationBalance,
+          color: t.destinationAccount.color,
+          description: t.destinationAccount.description,
+        }
+      : null,
   };
 }
+
 
 export function TransactionsHistory() {
   const { user, token } = useAuth();
@@ -44,6 +47,7 @@ export function TransactionsHistory() {
     axiosPrivate
       .get("/transactions")
       .then((res) => {
+        console.log(res.data)
         const mapped = res.data.map(mapTransactionFromApi);
         console.log(mapTransactionFromApi)
         setTransactions(mapped);

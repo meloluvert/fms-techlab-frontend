@@ -50,7 +50,9 @@ export function TransactionsCard(transaction: ITransaction) {
 
 
             <DateAmountCard
+                destinationAccountBalance={transaction.destinationBalance}
                 sourceAccount={transaction.sourceAccount}
+                sourceAccountBalance={transaction.originBalance}
                 destinationAccount={transaction.destinationAccount}
                 date={transaction.created_at}
                 type={transaction.type}

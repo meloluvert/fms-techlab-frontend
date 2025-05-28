@@ -8,27 +8,23 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { colors } from "../../../styles/colors";
 import { axiosPrivate } from "../../../services/api";
 import type { IAccount } from "../../../interfaces";
-import type { IAccountType } from "../../../interfaces";
 import { Loading } from "../../../components/Loading";
-export const accountsTypes: IAccountType[] = [
-  {
-    id: "1",
-    name: "Conta Principal",
-  },
-  {
-    id: "2",
-    name: "Poupança",
-  },
-  {
-    id: "3",
-    name: "Investimentos",
-  },
-  {
-    id: "4",
-    name: "Carteira Digital",
-  },
-];
 export function NewTransaction() {
+  function parseMoneyInput(value: string | number): number {
+    if (typeof value === "number") return value;
+  
+    // Remove espaços e troca vírgula por ponto
+    const normalized = value.trim().replace(",", ".");
+  
+    const parsed = Number(normalized);
+  
+    if (isNaN(parsed)) {
+      return 0; // ou lance um erro, ou trate como quiser
+    }
+  
+    return parsed;
+  }
+  
   const { id } = useParams(); // id da conta fixa, se existir
   const navigate = useNavigate();
 
@@ -81,7 +77,7 @@ export function NewTransaction() {
 
     try {
       await axiosPrivate.post("/transactions", {
-        amount: value,
+        amount: Math.round(Number(value) * 100),
         sourceAccount: { id: fromId },
         destinationAccount: { id: toId },
         description: description,
@@ -164,8 +160,8 @@ export function NewTransaction() {
         <TransferTable
           fromName={fromAccount.name}
           toName={toAccount.name}
-          fromBalance={Number(fromAccount.balance) / 100}
-          toBalance={Number(toAccount.balance) / 100}
+          fromBalance={parseMoneyInput(fromAccount.balance)}
+          toBalance={parseMoneyInput(toAccount.balance)}
           transferValue={value}
         />
       )}
