@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { axiosPrivate } from "../../../services/api";
 import { LargeButton } from "../../../components/Buttons/LargeButton";
 import { colors } from "../../../styles/colors";
+import { Loading } from "../../../components/Loading";
 
 export function NewAccountType() {
   const [name, setName] = useState("");
@@ -29,6 +30,7 @@ export function NewAccountType() {
       setLoading(false);
     }
   };
+  if(loading) return <Loading/>
 
   return (
     <form
@@ -56,7 +58,6 @@ export function NewAccountType() {
           text="Criar"
           color={colors.buttonBlue}
           type="submit"
-          disabled={loading}
         />
       </div>
     </form>

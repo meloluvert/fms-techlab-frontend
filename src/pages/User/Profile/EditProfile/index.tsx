@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MdCheck, MdEdit, MdCancel } from "react-icons/md";
-import { SmallButton } from "../../../../components/Buttons/SmallButton";
 import { FormInput } from "../../../../components/FormInput";
 import { axiosPrivate } from "../../../../services/api";
 import { colors } from "../../../../styles/colors";

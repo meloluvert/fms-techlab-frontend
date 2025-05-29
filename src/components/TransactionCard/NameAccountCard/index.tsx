@@ -1,14 +1,14 @@
 import { FaArrowRightLong } from "react-icons/fa6";
 import { colors } from "../../../styles/colors";
-import type { IAccount, IAccountType } from "../../../interfaces";
+import type { IAccount } from "../../../interfaces";
 
 export interface IAccountCard {
   type?: string;
-  sourceAccount?: IAccount | null;
+  originAccount?: IAccount | null;
   destinationAccount?: IAccount;
 }
 
-export function NameAccountCard({ type, sourceAccount, destinationAccount }: IAccountCard) {
+export function NameAccountCard({ type, originAccount, destinationAccount }: IAccountCard) {
   if (type === "initial_balance") {
     return (
       <div className="mt-2 text-base text-white">
@@ -25,7 +25,7 @@ export function NameAccountCard({ type, sourceAccount, destinationAccount }: IAc
           color: type === "transfer" ? colors.lightRed : colors.white,
         }}
       >
-        {sourceAccount?.name}
+        {originAccount?.name}
       </div>
       <FaArrowRightLong className="w-1/5" />
       <div

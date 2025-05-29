@@ -7,7 +7,7 @@ interface AccountTypeCardProps {
   accountType: {
     id: string;
     name: string;
-    user?: any[]; // pode ser undefined ou array vazio
+    user?: any[];
   };
   onDelete: (id: string) => void;
 }
@@ -19,7 +19,7 @@ export function AccountTypeCard({ accountType, onDelete }: AccountTypeCardProps)
     }
   };
 
-  // Só mostra botões se o tipo NÃO for universal (ou seja, se tiver user associado)
+  // se o tipo da conta não for universal (para todos os usuários) é possível editar
   const isEditable = accountType.user && accountType.user.length > 0;
 
   return (

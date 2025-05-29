@@ -10,7 +10,6 @@ export function EditAccountType() {
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [saving, setSaving] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -36,14 +35,11 @@ export function EditAccountType() {
       return;
     }
 
-    setSaving(true);
     try {
       await axiosPrivate.put(`/account-types/${id}`, { name });
       navigate("/account-types");
     } catch (err: any) {
       setError(err?.response?.data?.message || "Erro ao atualizar tipo de conta.");
-    } finally {
-      setSaving(false);
     }
   };
 

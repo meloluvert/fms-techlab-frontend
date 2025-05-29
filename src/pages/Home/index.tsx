@@ -5,7 +5,6 @@ import { axiosPrivate } from "../../services/api";
 import { IoIosArrowUp } from "react-icons/io";
 
 import { Loading } from "../../components/Loading";
-import { FaPlus } from "react-icons/fa";
 
 import { colors } from "../../styles/colors";
 export function Home() {
@@ -34,12 +33,13 @@ export function Home() {
   return (
     <main className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-2 gap-4 ">
       {accounts.map((acc) => (
-        <AccountCard key={acc.id} account={acc} />
+        <AccountCard account={acc} />
       ))}
 
       {/* Botão toggle fixo */}
       <div className="fixed bottom-7 right-7 flex flex-col items-center space-y-2 z-50">
         {/* Menu suspenso */}
+
         {menuOpen && (
           <div className="mb-2 flex flex-col bg-black bg-opacity-80 rounded-lg shadow-lg w-40 text-white text-center">
             <a

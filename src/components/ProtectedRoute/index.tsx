@@ -1,6 +1,5 @@
 
 import type { JSX } from "react";
-// ProtectedRoute.tsx
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../../contexts/auth";
 import { Loading } from "../Loading";

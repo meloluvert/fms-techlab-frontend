@@ -1,4 +1,3 @@
-// src/routes/AppRouter.tsx
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import { publicRoutes } from "./publicRoutes";
@@ -10,9 +9,9 @@ import { accountTypesRoutes } from "./privateRoutes/accountTypeRoutes";
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />, // <- TUDO deve ficar DENTRO do App (com Outlet)
+    element: <App />, 
     children: [
-      ...publicRoutes, // login, cadastro
+      ...publicRoutes, 
       ...accountTypesRoutes.map((route) => ({
         ...route,
         element: <ProtectedRoute>{route.element}</ProtectedRoute>,

@@ -18,6 +18,7 @@ export function LargeButton({
   onClick,
   type,
 }: ILargeButton) {
+  //route não pode ser null caso usemos links
   if (route) {
     return (
       route && (

@@ -9,6 +9,9 @@ export function Footer({ page }: INav) {
        <div className="md:hidden w-screen fixed bottom-0">
       <Nav page={page}/>
        </div>
+       <div className="hidden   text-center text-white md:block">
+    Desenvolvido por <a href="https://github.com/meloluvert/">Lucas Melo</a>
+       </div>
     </footer>
   );
 }

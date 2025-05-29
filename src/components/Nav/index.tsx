@@ -36,7 +36,7 @@ export function Nav({ page }: INav) {
 
           ${
             open
-              ? "  md:z-50 md:w-48 md:flex md:flex-col md:bg-black md:shadow-lg "
+              ? "  md:z-50 md:w-48 md:flex  md:bg-black md:shadow-lg "
               : "md:hidden lg:flex"
           }
         `}
@@ -58,7 +58,7 @@ export function Nav({ page }: INav) {
         </div>
 
         {/* TRANSAÇÕES */}
-        <div className="flex px-2 flex-col md:flex-row items-center justify-center">
+        <div className="flex px-2 flex-col  items-center justify-center md:flex-row">
           <div className="flex justify-center w-full">
             <GoArrowSwitch
               size={iconSize}

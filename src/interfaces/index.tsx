@@ -1,14 +1,13 @@
-import type { ReactNode } from "react";
+
 
 export interface ITransaction {
     id:string;
     destinationBalance?: number,
     originBalance?: number,
     type?: string;
-    amount: number; // valor transferido
-    sourceAccount?: IAccount | null;
+    amount: number; 
     originAccount?: IAccount | null;
-    destinationAccount?: IAccount ;
+    destinationAccount?: IAccount;
     description:string
     created_at: Date;
 }

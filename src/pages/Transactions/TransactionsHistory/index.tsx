@@ -13,7 +13,7 @@ export function mapTransactionFromApi(t: any): ITransaction {
     destinationBalance: t.destinationBalance,
     originBalance: t.originBalance,
     description: t.description,
-    sourceAccount: t.originAccount
+    originAccount: t.originAccount
       ? {
           id: t.originAccount.id,
           name: t.originAccount.name,
@@ -23,14 +23,14 @@ export function mapTransactionFromApi(t: any): ITransaction {
         }
       : null,
     destinationAccount: t.destinationAccount
-      ? {
+? {
           id: t.destinationAccount.id,
           name: t.destinationAccount.name,
           balance: t.destinationBalance,
           color: t.destinationAccount.color,
           description: t.destinationAccount.description,
         }
-      : null,
+      : undefined
   };
 }
 

@@ -44,15 +44,15 @@ export function TransactionsCard(transaction: ITransaction) {
 
             <NameAccountCard
                 type={transaction.type}
-                sourceAccount={transaction.sourceAccount}
+                originAccount={transaction.originAccount}
                 destinationAccount={transaction.destinationAccount}
             />
 
 
             <DateAmountCard
                 destinationAccountBalance={transaction.destinationBalance}
-                sourceAccount={transaction.sourceAccount}
-                sourceAccountBalance={transaction.originBalance}
+                originAccount={transaction.originAccount}
+                originAccountBalance={transaction.originBalance}
                 destinationAccount={transaction.destinationAccount}
                 date={transaction.created_at}
                 type={transaction.type}

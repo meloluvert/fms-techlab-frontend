@@ -55,7 +55,7 @@ export function NewTransaction() {
         }
       })
       .catch((err) => {
-        setError("Erro ao buscar contas.");
+        setError("Erro ao buscar contas.$");
         setAccounts([]);
       })
       .finally(() => setLoading(false));
@@ -78,7 +78,7 @@ export function NewTransaction() {
     try {
       await axiosPrivate.post("/transactions", {
         amount: Math.round(Number(value) * 100),
-        sourceAccount: { id: fromId },
+        originAccount: { id: fromId },
         destinationAccount: { id: toId },
         description: description,
       });

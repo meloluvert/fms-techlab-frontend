@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { colors } from "../../../styles/colors";
 import { Link } from "react-router-dom";
 export function SmallButton({
   route,
