@@ -1,6 +1,14 @@
 import type { INav } from "../Footer";
 import { Nav } from "../Nav";
+import { useAuth } from "../../contexts/auth";
+import { SmallButton } from "../Buttons/SmallButton";
+import { colors } from "../../styles/colors";
+import { FaSignOutAlt } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
 export function Header({ page }: INav) {
+  const location = useLocation();
+  const isAuthPage = ['/login', '/register'].includes(location.pathname);
+  const {logout} = useAuth();
   return (
     <header className="flex flex-row bg-black text-golden  px-5 py-3 static">
       <div className="w-full flex flex-row justify-between md:justify-start">
@@ -13,8 +21,12 @@ export function Header({ page }: INav) {
           </span>
         </div>
       </div>
-      <div className="hidden md:block ">
+      <div className={ ` ${isAuthPage ? 'md:hidden' : ''} hidden md:block `}>
         <Nav page={page} />
+      </div>
+      <div className={ ` ${isAuthPage ? 'md:hidden hidden' : ''}  `}>
+
+      <SmallButton color={colors.bgRed} onClick={() => logout()} icon={<FaSignOutAlt color={colors.white} size={20} />}/>
       </div>
     </header>
   );

@@ -54,6 +54,7 @@ export function ViewAccount() {
           </span>
 
           <div className="w-1/2 flex flex-row items-center justify-end gap-1">
+          <div className="w-fit flex flex-wrap">
             <SmallButton
               color={colors.buttonRed}
               icon={<FaTrash color={colors.white} size={20} />}
@@ -108,6 +109,7 @@ export function ViewAccount() {
           <TransactionsCard key={t.id} {...t} />
         ))}
       </div>
+    </div>
     </div>
   );
 }

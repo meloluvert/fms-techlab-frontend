@@ -12,7 +12,7 @@ export function SmallButton({
   onClick?: () => void;
 }) {
   return (
-    route ? <Link to={route} className="block w-full">
+    route ? <Link to={route} className="block ">
     <button
       className="rounded-full bg-black border-1 border-white p-2.5"
       style={{ borderColor: color }}

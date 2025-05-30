@@ -12,6 +12,7 @@ export function useEditAccount(id: string | undefined) {
     type_id: "",
     description: "",
     color: "#ffffff",
+    balance: "", // <-- saldo como string para facilitar edição
   });
 
   useEffect(() => {
@@ -32,9 +33,12 @@ export function useEditAccount(id: string | undefined) {
         setForm({
           name: accountRes.data.name,
           type_id: accountRes.data.type.id,
-          description: accountRes.data.description,
-          color: accountRes.data.color,
+          description: accountRes.data.description || "",
+          color: accountRes.data.color || "#ffffff",
+          balance: accountRes.data.balance.replace(',', '.'),
+
         });
+        console.log( accountRes.data.balance.replace(',', '.'))
       })
       .catch((err: any) => {
         setError(err?.response?.data?.message || "Erro ao buscar dados.");
@@ -48,19 +52,20 @@ export function useEditAccount(id: string | undefined) {
     >
   ) => {
     const { name, value } = e.target;
+  
     setForm((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
-
+  
   const handleSubmit = async (
     e: React.FormEvent,
     navigate: (path: string) => void,
   ) => {
     e.preventDefault();
     setError(null);
-
+  
     if (!form.name.trim()) {
       setError("O nome da conta é obrigatório.");
       return;
@@ -69,15 +74,22 @@ export function useEditAccount(id: string | undefined) {
       setError("O tipo da conta é obrigatório.");
       return;
     }
-
+  
+    const balanceNumber = Number(form.balance.replace(",", "."));
+    if (isNaN(balanceNumber) || balanceNumber < 0) {
+      setError("Saldo inválido.");
+      return;
+    }
+  
     setLoading(true);
-
+  
     try {
       await axiosPrivate.put(`/accounts/${id}`, {
         name: form.name,
         type_id: form.type_id,
         description: form.description,
         color: form.color,
+        balance: Math.round(balanceNumber * 100), // envia em centavos
       });
       navigate(`/account/${id}`);
     } catch (err: any) {
@@ -86,7 +98,7 @@ export function useEditAccount(id: string | undefined) {
       setLoading(false);
     }
   };
-
+  
   return {
     accountTypes,
     account,

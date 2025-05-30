@@ -2,7 +2,7 @@ import { AccountCard } from "../../components/AccountCard";
 import { useAuth } from "../../contexts/auth";
 import { useEffect, useState } from "react";
 import { axiosPrivate } from "../../services/api";
-import { IoIosArrowUp } from "react-icons/io";
+import { FaPlus } from "react-icons/fa";
 
 import { Loading } from "../../components/Loading";
 
@@ -27,17 +27,16 @@ export function Home() {
       })
       .finally(() => setLoading(false));
   }, [token]);
-
+  
   if (loading) return <Loading />;
-
   return (
-    <main className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-2 gap-4 ">
+    <main className={`  grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-2 gap-4  `}>
       {accounts.map((acc) => (
         <AccountCard account={acc} />
       ))}
-
+{accounts.length == 0 && <div className="text-white  text-center">Crie suas contas no botão abaixo </div>}
       {/* Botão toggle fixo */}
-      <div className="fixed bottom-7 right-7 flex flex-col items-center space-y-2 z-50">
+      <div className="fixed bottom-20 right-15 flex flex-col items-center space-y-2 z-50">
         {/* Menu suspenso */}
 
         {menuOpen && (
@@ -69,10 +68,10 @@ export function Home() {
         {/* Botão que abre/fecha o menu */}
         <button
           onClick={() => setMenuOpen((prev) => !prev)}
-          className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 rounded-full p-3 shadow-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"
+          className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 rounded-full p-3 shadow-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 "
           aria-label="Abrir menu"
         >
-        <IoIosArrowUp color={colors.black} />
+        <FaPlus color={colors.black} />
 
 
         </button>
