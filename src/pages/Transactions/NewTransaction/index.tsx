@@ -54,7 +54,7 @@ export function NewTransaction() {
           setToId(res.data[1]?.id);
         }
       })
-      .catch((err) => {
+      .catch(() => {
         setError("Erro ao buscar contas.$");
         setAccounts([]);
       })

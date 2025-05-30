@@ -4,6 +4,7 @@ import { FormInput } from "../../../components/FormInput";
 import { LargeButton } from "../../../components/Buttons/LargeButton";
 import { colors } from "../../../styles/colors";
 import { axiosPrivate } from "../../../services/api";
+import { Loading } from "../../../components/Loading";
 
 export function Register() {
   // Estado para controlar os inputs do formulário
@@ -23,7 +24,6 @@ export function Register() {
       [e.target.name]: e.target.value,
     });
   };
-  
   // Envia os dados para a API no submit do formulário
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -48,6 +48,7 @@ export function Register() {
       setLoading(false);
     }
   };
+  if(loading) return <Loading/>
 
   return (
     <form

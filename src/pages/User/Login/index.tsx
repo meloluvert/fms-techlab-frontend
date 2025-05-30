@@ -9,7 +9,7 @@ import { useAuth } from "../../../contexts/auth"; // aqui
 
 export function Login() {
   const navigate = useNavigate();
-  const { login, user, token } = useAuth();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);

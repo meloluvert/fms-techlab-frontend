@@ -60,7 +60,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           setUser(res.data);
           setToken(storedToken);
         })
-        .catch((err) => {
+        .catch(() => {
           logout();
         })
         .finally(() => setLoading(false));
