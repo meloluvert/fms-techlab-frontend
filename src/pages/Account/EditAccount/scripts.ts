@@ -12,7 +12,7 @@ export function useEditAccount(id: string | undefined) {
     type_id: "",
     description: "",
     color: "#ffffff",
-    balance: "", // <-- saldo como string para facilitar edição
+    balance: "", 
   });
 
   useEffect(() => {
@@ -35,10 +35,9 @@ export function useEditAccount(id: string | undefined) {
           type_id: accountRes.data.type.id,
           description: accountRes.data.description || "",
           color: accountRes.data.color || "#ffffff",
-          balance: accountRes.data.balance.replace(',', '.'),
+          balance: accountRes.data.balance.replace(/\./g, "").replace(",", "."),
 
         });
-        console.log( accountRes.data.balance.replace(',', '.'))
       })
       .catch((err: any) => {
         setError(err?.response?.data?.message || "Erro ao buscar dados.");
@@ -84,12 +83,13 @@ export function useEditAccount(id: string | undefined) {
     setLoading(true);
   
     try {
+      console.log(Math.round(Number(form.balance) * 100))
       await axiosPrivate.put(`/accounts/${id}`, {
         name: form.name,
         type_id: form.type_id,
         description: form.description,
         color: form.color,
-        balance: Math.round(balanceNumber * 100), // envia em centavos
+        balance: Math.round(Number(form.balance) * 100), 
       });
       navigate(`/account/${id}`);
     } catch (err: any) {

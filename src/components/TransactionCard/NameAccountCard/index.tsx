@@ -5,7 +5,7 @@ import type { IAccount } from "../../../interfaces";
 export interface IAccountCard {
   type?: string;
   originAccount?: IAccount | null;
-  destinationAccount?: IAccount;
+  destinationAccount?: IAccount | null;
 }
 
 export function NameAccountCard({ type, originAccount, destinationAccount }: IAccountCard) {
@@ -20,21 +20,21 @@ export function NameAccountCard({ type, originAccount, destinationAccount }: IAc
   return (
     <div className="flex items-center justify-around gap-2 mt-2 text-center text-base">
       <div
-      className="w-2/5"
+      className="w-2/5 text-bold"
         style={{
           color: type === "transfer" ? colors.lightRed : colors.white,
         }}
       >
-        {originAccount?.name}
+        {originAccount?.name || "?"}
       </div>
-      <FaArrowRightLong className="w-1/5" />
+      <FaArrowRightLong className="w-1/5 text-bold" />
       <div
       className="w-2/5"
         style={{
           color: type === "transfer" ? colors.buttonGreen : colors.white,
         }}
       >
-        {destinationAccount?.name}
+        {destinationAccount?.name || "?"}
       </div>
     </div>
   );

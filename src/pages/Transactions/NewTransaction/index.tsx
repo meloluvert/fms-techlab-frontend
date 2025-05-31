@@ -12,19 +12,11 @@ import { Loading } from "../../../components/Loading";
 export function NewTransaction() {
   function parseMoneyInput(value: string | number): number {
     if (typeof value === "number") return value;
-  
-    // Remove espaços e troca vírgula por ponto
-    const normalized = value.trim().replace(",", ".");
-  
+    const normalized = value.trim().replace(/\./g, "").replace(",", ".");
     const parsed = Number(normalized);
-  
-    if (isNaN(parsed)) {
-      return 0; // ou lance um erro, ou trate como quiser
-    }
-  
-    return parsed;
+    return isNaN(parsed) ? 0 : parsed;
   }
-  
+
   const { id } = useParams(); // id da conta fixa, se existir
   const navigate = useNavigate();
 
@@ -34,53 +26,71 @@ export function NewTransaction() {
   const [toId, setToId] = useState<string | undefined>(undefined);
   const [value, setValue] = useState<number>(0);
   const [error, setError] = useState<string | null>(null);
+  const [description, setDescription] = useState<string>("");
 
-  // Buscar contas do usuário
+  const isFixedFrom = id && id !== "new";
+
   useEffect(() => {
     setLoading(true);
     axiosPrivate
       .get("/accounts")
       .then((res) => {
         setAccounts(res.data);
-        // Se tem id na URL, fixa a conta de origem
-        if (id) {
+
+        if (isFixedFrom && res.data.some((acc: IAccount) => acc.id === id)) {
           setFromId(id);
-          // Seleciona a primeira conta diferente da origem como destino
           const firstOther = res.data.find((acc: IAccount) => acc.id !== id);
           setToId(firstOther ? firstOther.id : undefined);
         } else {
-          // Se não tem id, seleciona as duas primeiras contas como padrão
+          // Caso id seja "new" ou inválido, libera seleção completa
           setFromId(res.data[0]?.id);
           setToId(res.data[1]?.id);
         }
       })
       .catch(() => {
-        setError("Erro ao buscar contas.$");
+        setError("Erro ao buscar contas.");
         setAccounts([]);
       })
       .finally(() => setLoading(false));
-  }, [id]);
+  }, [id, isFixedFrom]);
 
-  // Busca os dados das contas selecionadas
+  // Atualiza o toId automaticamente quando fromId mudar para evitar duplicidade
+  useEffect(() => {
+    if (!fromId) return;
+
+    // Se toId for igual a fromId, ou toId não existir, tenta atualizar para outra conta válida
+    if (toId === fromId || !toId) {
+      const firstOther = accounts.find((acc) => acc.id !== fromId);
+      setToId(firstOther ? firstOther.id : undefined);
+    }
+  }, [fromId, toId, accounts]);
+
   const fromAccount = accounts.find((acc) => acc.id === fromId);
   const toAccount = accounts.find((acc) => acc.id === toId);
-  const [description, setDescription] = useState<string>("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
 
-    if (!fromId || !toId || !value || fromId === toId) {
-      setError("Preencha todos os campos corretamente.");
+    if (!fromId || !toId) {
+      setError("Selecione as contas de origem e destino.");
+      return;
+    }
+    if (fromId === toId) {
+      setError("As contas de origem e destino devem ser diferentes.");
+      return;
+    }
+    if (!value || value <= 0) {
+      setError("Informe um valor válido para a transferência.");
       return;
     }
 
     try {
       await axiosPrivate.post("/transactions", {
-        amount: Math.round(Number(value) * 100),
+        amount: Math.round(value * 100),
         originAccount: { id: fromId },
         destinationAccount: { id: toId },
-        description: description,
+        description,
       });
       navigate("/");
     } catch (err: any) {
@@ -90,9 +100,15 @@ export function NewTransaction() {
     }
   };
 
-  if (loading) return <Loading/>;
-  if (!accounts.length) return <div className="text-white">Nenhuma conta encontrada.</div>;
-  if (accounts.length == 1) return <div className="text-white">Você precisa de duas contas para transferir</div>;
+  if (loading) return <Loading />;
+  if (!accounts.length)
+    return <div className="text-white">Nenhuma conta encontrada.</div>;
+  if (accounts.length === 1)
+    return (
+      <div className="text-white">
+        Você precisa de pelo menos duas contas para realizar transferências.
+      </div>
+    );
 
   return (
     <form
@@ -103,21 +119,27 @@ export function NewTransaction() {
       <h2 className="text-2xl font-bold text-white text-left">
         Nova transação
       </h2>
+
       {error && <div className="text-red-500 mb-2">{error}</div>}
-      <div className="flex flex-row items-center">
-        <div className="w-3/7">
+
+      <div className="flex flex-row items-center gap-2">
+        <div className="flex-1">
           <FormInput
             name="from"
             label="De"
             type="select"
             value={fromId}
-            options={id ? accounts.filter((acc) => acc.id === id) : accounts}
+            options={
+              isFixedFrom ? accounts.filter((acc) => acc.id === id) : accounts // todas as contas disponíveis
+            }
             onChange={(e) => setFromId(e.target.value)}
+            disabled={isFixedFrom ? true : false}
           />
         </div>
 
-        <FaArrowRightLong className="w-1/7" color={colors.white} />
-        <div className="w-3/7">
+        <FaArrowRightLong className="mx-2" color={colors.white} size={24} />
+
+        <div className="flex-1">
           <FormInput
             name="to"
             label="Para"
@@ -128,13 +150,14 @@ export function NewTransaction() {
           />
         </div>
       </div>
+
       <FormInput
         name="valor"
         label="Valor"
         type="number"
         step="0.01"
         value={value}
-        onChange={(e) => setValue(Number(e.target.value))}
+        onChange={(e) => setValue(parseMoneyInput(e.target.value))}
         placeholder="Valor da transferência"
       />
 
@@ -166,6 +189,7 @@ export function NewTransaction() {
           transferValue={value}
         />
       )}
+
       <div className="py-5 flex flex-col sm:flex-row gap-2">
         <LargeButton
           text="Realizar transferência"

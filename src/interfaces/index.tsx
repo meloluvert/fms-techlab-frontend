@@ -7,7 +7,7 @@ export interface ITransaction {
     type?: string;
     amount: number; 
     originAccount?: IAccount | null;
-    destinationAccount?: IAccount;
+    destinationAccount?: IAccount | null;
     description:string
     created_at: Date;
 }
@@ -37,6 +37,7 @@ export interface IForm {
     options?: IAccountType[] | IAccount[] | undefined; // apenas se type = "select"
     required?: boolean;
     readonly?: boolean
+    disabled?: boolean
   }
 
   export interface IUser{

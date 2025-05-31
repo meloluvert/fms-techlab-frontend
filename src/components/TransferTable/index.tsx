@@ -1,3 +1,4 @@
+
 interface ITransferTableProps {
   fromName: string;
   toName: string;
@@ -45,13 +46,21 @@ export function TransferTable({
         </tr>
         <tr>
           <td className="border-r border-white px-4 py-2 text-left">Futuro</td>
-          <td className="text-golden border-r border-white px-4 py-2 text-left">
+          <td
+            className={`border-r border-white px-4 py-2 text-left ${
+              futureFrom < 0 ? "text-red-600" : "text-golden"
+            }`}
+          >
             {futureFrom.toLocaleString("pt-BR", {
               style: "currency",
               currency: "BRL",
             })}
           </td>
-          <td className="text-golden px-4 py-2 text-left">
+          <td
+            className={`px-4 py-2 text-left ${
+              futureTo < 0 ? "text-red-600" : "text-golden"
+            }`}
+          >
             {futureTo.toLocaleString("pt-BR", {
               style: "currency",
               currency: "BRL",

@@ -72,24 +72,22 @@ export function EditAccount() {
         </div>
       </div>
 
-     
       <label
-  htmlFor="balance"
-  className="text-white font-bold text-sm mb-1 block"
->
-  Saldo
-</label>
-<input
-  type="number"
-  id="balance"
-  name="balance"
-  step="0.01"
-  placeholder="R$ 0.00"
-  value={form.balance}
-  onChange={handleChange}
-  className="w-full rounded-2xl bg-black text-white p-2"
-/> 
-
+        htmlFor="balance"
+        className="text-white font-bold text-sm mb-1 block"
+      >
+        Saldo
+      </label>
+      <input
+        type="number"
+        id="balance"
+        name="balance"
+        step="0.01"
+        placeholder="R$ 0.00"
+        value={form.balance}
+        onChange={handleChange}
+        className="w-full rounded-2xl bg-black text-white p-2"
+      />
 
       <label htmlFor="description" className="text-white text-sm mb-1 block">
         Descrição

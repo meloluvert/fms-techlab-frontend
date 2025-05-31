@@ -12,7 +12,6 @@ export function TransactionsCard(transaction: ITransaction) {
     let bgColor: string = colors.bgDarkGray; // valor padrão
     let icon: ReactNode | null = null;
     const sizeIcon = 20;
-    //Dependendo de cada 
     switch (transaction.type) {
         case "initial_balance":
             title_card = "Saldo Inicial";
@@ -32,6 +31,16 @@ export function TransactionsCard(transaction: ITransaction) {
             title_card = "Transferência";
             bgColor = colors.bgDarkGray;
             break;
+        case "edited":
+            title_card = "Edição de Saldo";
+            if(!transaction.originAccount){
+                bgColor = colors.bgGreen;
+            }else{
+
+                bgColor = colors.bgRed;
+            }
+            break;
+            
         default:
             title_card = "Desconhecido";
     }
@@ -48,6 +57,7 @@ export function TransactionsCard(transaction: ITransaction) {
                 destinationAccount={transaction.destinationAccount}
             />
 
+{transaction.description != "Saldo inicial" && transaction.description}
 
             <DateAmountCard
                 destinationAccountBalance={transaction.destinationBalance}
@@ -55,7 +65,6 @@ export function TransactionsCard(transaction: ITransaction) {
                 originAccountBalance={transaction.originBalance}
                 destinationAccount={transaction.destinationAccount}
                 date={transaction.created_at}
-                type={transaction.type}
             />
 
         </div>

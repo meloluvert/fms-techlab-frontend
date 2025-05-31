@@ -23,7 +23,7 @@ export function Nav({ page }: INav) {
 
       <nav
         className={`
-          bg-black w-full p-2 flex justify-around
+          bg-black w-screen p-2 flex justify-around
           fixed bottom-0
           md:flex-col
           md:absolute
@@ -33,7 +33,7 @@ export function Nav({ page }: INav) {
           md:h-min
           md:items-start
           lg:flex lg:flex-row lg:static
-
+          lg:w-full
           ${
             open
               ? "  md:z-50 md:w-48 md:flex  md:bg-black md:shadow-lg "
@@ -43,10 +43,12 @@ export function Nav({ page }: INav) {
       >
         <div className="flex px-2 flex-col md:flex-row items-center justify-center">
           <div className="flex justify-center w-full">
+            <a href="/">
             <FaHome
               size={iconSize}
               color={page === "home" ? colors.white : colors.disabled}
             />
+            </a>
           </div>
           <span
             className={`${
@@ -57,13 +59,14 @@ export function Nav({ page }: INav) {
           </span>
         </div>
 
-        {/* TRANSAÇÕES */}
         <div className="flex px-2 flex-col  items-center justify-center md:flex-row">
           <div className="flex justify-center w-full">
+          <a href="/transactions">
             <GoArrowSwitch
               size={iconSize}
               color={page === "transacoes" ? colors.white : colors.disabled}
             />
+            </a>
           </div>
           <span
             className={`${
@@ -78,11 +81,14 @@ export function Nav({ page }: INav) {
 
         <div className="flex px-2 flex-col md:flex-row items-center justify-center">
           <div className="flex justify-center w-full">
+          <a href="/profile">
             <MdPerson
               size={iconSize}
               color={page === "perfil" ? colors.white : colors.disabled}
             />
+              </a>
           </div>
+        
           <span
             className={`${
               page === "perfil" ? "text-white font-semibold" : "text-disabled"

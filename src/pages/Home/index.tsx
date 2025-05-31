@@ -36,7 +36,7 @@ export function Home() {
       ))}
 {accounts.length == 0 && <div className="text-white  text-center">Crie suas contas no botão abaixo </div>}
       {/* Botão toggle fixo */}
-      <div className="fixed bottom-20 right-15 flex flex-col items-center space-y-2 z-50">
+      <div className="fixed bottom-22 right-7 flex flex-col items-end space-y-2 z-50 ">
         {/* Menu suspenso */}
 
         {menuOpen && (

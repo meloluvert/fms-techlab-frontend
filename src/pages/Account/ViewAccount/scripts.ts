@@ -20,6 +20,7 @@ export function useViewAccount(id: string | undefined) {
       .then((res) => {
         setAccount(res.data);
         setTransactions(res.data.transactions || []);
+        console.log(res.data.transactions )
       })
       .catch(() => {
         setError("Erro ao buscar dados da conta");
@@ -28,11 +29,13 @@ export function useViewAccount(id: string | undefined) {
   }, [id]);
 
   const mappedTransactions = transactions.map((t) => {
-    let type: "received" | "sent" | "initial_balance" = "initial_balance";
+    let type: "received" | "sent" | "initial_balance" | "edited" = "initial_balance";
     if (t.destinationAccount?.id === account?.id && t.originAccount) {
       type = "received";
-    } else if (t.originAccount?.id === account?.id) {
+    } else if (t.originAccount?.id === account?.id && t.destinationAccount) {
       type = "sent";
+    }else if(t.originAccount == null || t.destinationAccount == null){
+      type = "edited";
     }
 
     return {

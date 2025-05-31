@@ -9,6 +9,7 @@ export function FormInput({
   options,
   step,
   required,
+  disabled,
   readonly,
 }: IForm) {
   return (
@@ -23,7 +24,7 @@ export function FormInput({
           name={name}                  
           value={value}                
           onChange={onChange}
-          disabled={options.length === 1}
+          disabled={options.length === 1 || disabled}
           className="w-full px-4 py-2 bg-zinc-800 rounded-full text-white outline-none"
           required={required}
         >

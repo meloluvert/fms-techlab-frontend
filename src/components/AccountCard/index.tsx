@@ -5,7 +5,7 @@ import type { IAccount } from "../../interfaces";
 export function AccountCard({ account }: { account: IAccount }) {
   return (
     <article
-      className="text-white my-2 text-base bg-black  w-85 p-2 rounded-xl border-t-red-100 border-t-3 lg:w-75"
+      className="text-white my-2 text-base bg-black max-w-screen w-85 p-2 rounded-xl border-t-red-100 border-t-3 lg:w-75"
       style={{ borderTopColor: account.color }}
     >
       <div className="text-xl">{account.name}</div>

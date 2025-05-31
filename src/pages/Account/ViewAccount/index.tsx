@@ -22,7 +22,9 @@ export function ViewAccount() {
       alert("Você precisa zerar a conta primeiro");
       return;
     }
-    const confirmed = window.confirm("Tem certeza que deseja excluir esta conta?");
+    const confirmed = window.confirm(
+      "Tem certeza que deseja excluir esta conta?"
+    );
     if (!confirmed) return;
 
     try {
@@ -30,7 +32,9 @@ export function ViewAccount() {
       alert("Conta excluída com sucesso!");
       navigate("/");
     } catch (err) {
-      alert("Erro ao excluir conta. Tente novamente.");
+      alert(
+        "Erro ao excluir conta. Tente novamente. Lembre-se de esvaziar a conta."
+      );
       console.error(err);
     }
   };
@@ -54,62 +58,64 @@ export function ViewAccount() {
           </span>
 
           <div className="w-1/2 flex flex-row items-center justify-end gap-1">
-          <div className="w-fit flex flex-wrap">
-            <SmallButton
-              color={colors.buttonRed}
-              icon={<FaTrash color={colors.white} size={20} />}
-              onClick={handleDelete}
-            />
-            <SmallButton
-              color={colors.buttonBlue}
-              icon={<MdEdit color={colors.white} size={20} />}
-              route={`/account/edit/${account.id}`}
+            <div className="w-fit flex flex-wrap">
+              <SmallButton
+                color={colors.buttonRed}
+                icon={<FaTrash color={colors.white} size={20} />}
+                onClick={handleDelete}
+              />
+              <SmallButton
+                color={colors.buttonBlue}
+                icon={<MdEdit color={colors.white} size={20} />}
+                route={`/account/edit/${account.id}`}
+              />
+            </div>
+          </div>
+        </div>
+        <span className="text-white text-base sm:text-base w-1/2 p-2">
+          {account.type?.name}
+        </span>
+        <div className="text-disabled text-xs flex justify-around">
+          <div className="text-base flex gap-2 flex-col sm:flex-row w-1/2">
+            <span>Atualizado em </span>
+            <span>{String(account.updated_at)}</span>
+          </div>
+          <div className="text-base flex gap-2 flex-col sm:flex-row w-1/2">
+            <span>Criado em </span>
+            <span>{String(account.created_at)}</span>
+          </div>
+        </div>
+        <p className="text-white text-justify">{account.description}</p>
+        <div className="flex flex-col sm:flex-row sm:justify-evenly md:justify-around justify-center items-center">
+          <div className="md:w-1/3 justify-self-end">
+            <p className="text-left md:inline-block md:w-full py-2 text-3xl text-golden">
+              R$ {account.balance}
+            </p>
+          </div>
+          <div className="w-full md:w-1/3 px-3 flex justify-center items-center max-w-sm">
+            <LargeButton
+              color={colors.buttonGreen}
+              text="Transferir"
+              route={`/transfer/${account.id}`}
+              icon={<GoArrowSwitch size={20} color={colors.white} />}
             />
           </div>
         </div>
-      </div>
-      <span className="text-white text-base sm:text-base w-1/2 p-2">
-        {account.type?.name}
-      </span>
-      <div className="text-disabled text-xs flex justify-around">
-        <div className="text-base flex gap-2 flex-col sm:flex-row w-1/2">
-          <span>Atualizado em </span>
-          <span>{String(account.updated_at)}</span>
-        </div>
-        <div className="text-base flex gap-2 flex-col sm:flex-row w-1/2">
-          <span>Criado em </span>
-          <span>{String(account.created_at)}</span>
-        </div>
-      </div>
-      <p className="text-white text-justify">{account.description}</p>
-      <div className="flex flex-col sm:flex-row sm:justify-evenly md:justify-around justify-center items-center">
-        <div className="md:w-1/3 justify-self-end">
-          <p className="text-left md:inline-block md:w-full py-2 text-3xl text-golden">
-            R$ {account.balance}
-          </p>
-        </div>
-        <div className="w-full md:w-1/3 px-3 flex justify-center items-center max-w-sm">
-          <LargeButton
-            color={colors.buttonGreen}
-            text="Transferir"
-            route={`/transfer/${account.id}`}
-            icon={<GoArrowSwitch size={20} color={colors.white} />}
+        <div className="flex flex-row text-white p-2 w-full justify-between items-center">
+          <span>Histórico de Transações</span>
+          <SmallButton
+            color={colors.white}
+            icon={<FaFilter color={colors.white} size={15} />}
           />
         </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          {mappedTransactions.map((t, index) => {
+            const isLast = index === mappedTransactions.length - 1;
+            const transaction = isLast ? { ...t, type: "initial_balance" } : t;
+            return <TransactionsCard key={t.id} {...transaction} />;
+          })}
+        </div>
       </div>
-      <div className="flex flex-row text-white p-2 w-full justify-between items-center">
-        <span>Histórico de Transações</span>
-        <SmallButton
-          color={colors.white}
-          icon={<FaFilter color={colors.white} size={15} />}
-        />
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        {mappedTransactions.map((t) => (
-          <TransactionsCard key={t.id} {...t} />
-        ))}
-      </div>
-    </div>
     </div>
   );
 }

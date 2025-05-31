@@ -48,7 +48,7 @@ export function AccountTypes() {
       {accountTypes.map((type) => (
         <AccountTypeCard key={type.id} accountType={type} onDelete={handleDelete} />
       ))}
-      <button className="text-gray bg-golden text-lg fixed bottom-7 right-7 p-2 font-semibold border rounded">
+      <button className="text-gray bg-golden text-lg fixed bottom-25 right-7 p-2 font-semibold rounded-full">
  <a href="/account-types/new"><FaPlus color={colors.black} /></a>
 </button>
     </div>

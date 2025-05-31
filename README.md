@@ -1,4 +1,4 @@
-# 💸 Financial Management System (Frontend)
+# 💰 Financial Management System (Frontend)
 
 Sistema web para **gerenciamento financeiro pessoal**, desenvolvido com **Vite + React + TypeScript + Tailwind CSS**.
 
@@ -54,10 +54,9 @@ src/
 - CRUD completo de:
   - **Tipos de Conta**
   - **Contas**
-  - **Transações financeiras**
 - Visualização de:
   - Saldo atualizado por conta
-  - Histórico de transferências
+  - Histórico de transferência **(não podem ser editadas nem excluídas)**
   - Transações individuais (enviadas, recebidas)
 
 ---
@@ -68,12 +67,13 @@ src/
 
 - Node.js (v18+ recomendado)
 - NPM ou Yarn
+[Clique aqui para instalar](https://balta.io/blog/node-npm-instalacao-configuracao-e-primeiros-passos)
 
 ### 🧭 Instalação
 
 ```bash
 # Clonar o projeto
-git clone https://github.com/seu-usuario/frontend-fms-techlab.git
+git clone https://github.com/meloluvert/fms-techlab-frontend.git
 cd frontend-fms-techlab
 
 # Instalar dependências
@@ -82,12 +82,12 @@ npm install
 
 ### 🔧 Configurar variáveis de ambiente
 
-Crie um arquivo `.env`:
+Use o arquivo `.env`:
 
 ```env
 VITE_API_URL=http://localhost:3000
 ```
-
+(isso faz rodar localmente, inicialmente vem com a URL da Api)
 ### 🏃 Executar localmente
 
 ```bash
@@ -107,12 +107,6 @@ npm run build
 
 ---
 
-## 🧪 Testes
-
-> Os testes são implementados no backend, utilizando `Jest`.  
-> O frontend não possui testes automatizados nesta etapa.
-
----
 
 ## 📎 Justificativas Técnicas
 
@@ -143,13 +137,13 @@ O backend utiliza:
 - **Jest** para testes
 - **Autenticação JWT**
 
-Veja o [README do backend](https://github.com/meloluvert/fms-techlab-backend) para mais detalhes.
+Veja o [README do backend](https://github.com/meloluvert/fms-techlab-backend/blob/main/README.md) para mais detalhes.
 
 ---
 
 ## 📝 Documentação do desafio
 
-- [Especificações oficiais do desafio (PDF)](./Desafio%20WebApp.pdf)
+- [Especificações oficiais do desafio (PDF)](https://github.com/tech4humans-brasil/techlab-ceu/blob/main/Finan%C3%A7as%20(Webapp)/Desafio%20WebApp.pdf)
 - Modelo de banco e lógica de negócio
 - Decisões de arquitetura explicadas no README do backend
 
