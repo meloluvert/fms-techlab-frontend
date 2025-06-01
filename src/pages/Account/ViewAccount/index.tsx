@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { MdEdit } from "react-icons/md";
-import { FaTrash, FaFilter } from "react-icons/fa";
+import { FaTrash,} from "react-icons/fa";
 import { axiosPrivate } from "../../../services/api";
 import { GoArrowSwitch } from "react-icons/go";
 import { LargeButton } from "../../../components/Buttons/LargeButton";
@@ -101,12 +101,9 @@ export function ViewAccount() {
             />
           </div>
         </div>
-        <div className="flex flex-row text-white p-2 w-full justify-between items-center">
+        <div className="flex flex-row text-white text-1xl p-2 w-full justify-center items-center md:justify-start">
           <span>Histórico de Transações</span>
-          <SmallButton
-            color={colors.white}
-            icon={<FaFilter color={colors.white} size={15} />}
-          />
+          
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {mappedTransactions.map((t, index) => {
