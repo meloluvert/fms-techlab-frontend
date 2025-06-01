@@ -1,10 +1,10 @@
-# 💰 Financial Management System (Frontend)
+# 💰 Financial Management System - Frontend
 
 Sistema web para **gerenciamento financeiro pessoal**, desenvolvido com **Vite + React + TypeScript + Tailwind CSS**.
 Acesse o sistema online por [**aqui**](https://fms-techlab-frontend.vercel.app/)
 ---
 
-## 🚀 Tecnologias
+##  🖳 Tecnologias
 
 - **Vite**: build rápido e leve para projetos modernos.
 - **React**: biblioteca para construção da interface do usuário.
@@ -26,12 +26,12 @@ src/
 ├── components/       # Componentes reutilizáveis (botões, inputs, etc.)
 ├── contexts/         # Contextos globais (ex: Auth)
 ├── interfaces/       # Tipagens (ex: IAccount, IUser)
-├── pages/            # Páginas principais (Home, Login, etc.)
+├── pages/            # Páginas principais (Home, Account, etc.)
 ├── routes/           # Definição das rotas com React Router
 ├── services/         # Axios e serviços externos
 ├── styles/           # Configurações do Tailwind
-├── App.tsx           # Componente principal
-├── main.tsx          # Entrada da aplicação
+├── App.tsx           # Página com Header e Footer padrões 
+├── main.tsx          # Página principal com o AuthProvider
 ```
 
 ---
@@ -70,11 +70,11 @@ src/
 [Clique aqui para instalar](https://balta.io/blog/node-npm-instalacao-configuracao-e-primeiros-passos)
 
 ### 🧭 Instalação
-
+Você pode baixar ele por meio de um [zip do github](https://docs.github.com/pt/repositories/working-with-files/using-files/downloading-source-code-archives), se preferir.
 ```bash
 # Clonar o projeto
 git clone https://github.com/meloluvert/fms-techlab-frontend.git
-cd frontend-fms-techlab
+cd fms-techlab-frontend
 
 # Instalar dependências
 npm install
@@ -145,8 +145,8 @@ Veja o [README do backend](https://github.com/meloluvert/fms-techlab-backend/blo
 
 - [Especificações oficiais do desafio (PDF)](https://github.com/tech4humans-brasil/techlab-ceu/blob/main/Finan%C3%A7as%20(Webapp)/Desafio%20WebApp.pdf)
 - Modelo de banco e lógica de negócio
-- Decisões de arquitetura explicadas no README do backend
+- Decisões de arquitetura explicadas no [README do backend](https://github.com/meloluvert/fms-techlab-backend/blob/main/README.md)
 
 ---
 
-> Projeto desenvolvido para o desafio técnico **Tech4Humans**: gestor financeiro pessoal.
+> Projeto desenvolvido para o desafio técnico [**Tech4Humans**](https://github.com/tech4humans-brasil): gestor financeiro pessoal.
